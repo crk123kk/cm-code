@@ -35,3 +35,22 @@ function removeDup(arr) {
 function flattenDeep(arr1) {
     return arr1.reduce((acc, val) => (Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val)), [])
 }
+
+/**
+ * 过滤：filter
+ */
+
+Array.prototype.myFilter = function (fn, context) {
+    if (typeof fn !== 'function') {
+        throw new TypeError('no function')
+    }
+    let arr = this
+    let result = []
+    for (let i = 0; i < arr.length; i++) {
+        let temp = fn.call(context, arr[i], i, arr)
+        if (temp) {
+            result.push(arr[i])
+        }
+    }
+    return result
+}
